@@ -1,4 +1,6 @@
-#DS preprocessing
+# DS preprocessing
+# 버스정류장 preprocessing
+# 지하철역 주변 버스정류장 data select, concat all bus stop dataset
 
 import pandas as pd
 
