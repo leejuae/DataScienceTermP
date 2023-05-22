@@ -5,7 +5,7 @@
 + 데이터 경로 전부 수정해야함!! 다 내 경로로 지정되어있음.
 + 파일도 따로 다운받아야 함 (.csv파일을 ignore 설정해둠)
 + ((데과팀플notion -> data preprocessing -> 이용한 데이터)에 올려두긴 함.)
-+ [파일다운] (https://woodean.notion.site/af2cb73295464d108f686d3d8dcd6653)
++ [파일다운](https://woodean.notion.site/af2cb73295464d108f686d3d8dcd6653)
 
 ### 진행상황
 1. **버스정류장** 데이터끼리 합치기 완료
