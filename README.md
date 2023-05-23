@@ -14,6 +14,5 @@
 ### 할일
 1. subway dataset에 **요일 feature 추가**
 2. subway dataset에 **부역명 제거**해야함.
-3. subway dataset과 busstop dataset 요일별 평균 승하차인원 구해서 새로 feature 추가하기
 4. 날씨 dataset도 합쳐야함
 5. normalization, tokenization 등 수행해야함.
