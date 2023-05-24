@@ -11,6 +11,7 @@ def dropCol(df):
     return df[['사용일자', '버스정류장ARS번호', '승차총승객수', '하차총승객수']]
 
 
+# 버스 기준으로 데이터 정리되어있음!! 따라서 정류장 ID와 버스정류장 ARS 번호(둘 다 고유ID) 값을 이용해서 승하차 승객수를 합침.
 # Group by '버스정류장ARS번호', '사용일자' and sum '승차총승객수' and '하차총승객수'
 def groupdf(df):
     df = df.groupby(['사용일자', '버스정류장ARS번호']).sum().reset_index()
@@ -18,6 +19,7 @@ def groupdf(df):
 
 
 # Select rows from df_nearestBusStation where '정류장ID' matches with '버스정류장ARS번호' in df_BusStation
+# 전철역 주변 버스정류장 데이터(nearest_busStation)을 이용해서 지하철역 주변 버스정류장만 뽑아냄.
 def mergedf(df):
     # Drop rows with invalid '버스정류장ARS번호'
     df = df[df['버스정류장ARS번호'] != '~']
@@ -90,4 +92,5 @@ df_concatenated = pd.concat([df_BusStation2201, df_BusStation2202, df_BusStation
                              df_BusStation2210, df_BusStation2211, df_BusStation2212,
                              df_BusStation2301, df_BusStation2302, df_BusStation2303, df_BusStation2304])
 
+# 지하철 역 주변의 버스정류장만 뽑아서 만듦.
 df_concatenated.to_csv("concatBusStation.csv")
