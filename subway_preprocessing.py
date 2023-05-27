@@ -5,13 +5,13 @@ import data_declaration
 import re
 
 def dropCol(df):
-    return df[['사용일자','호선', '역명', '승차총승객수', '하차총승객수']]
+    return df[['사용일자', '노선명', '역명', '승차총승객수', '하차총승객수']]
 
 # 역명(부멱명) 데이터에서 부역명 데이터를 삭제함(nearrest_busStation data에는 부역명 정보가 없기 때문)
-def remove_bracketed_data(dataset, column_name):
+def remove_bracketed_data(df, column_name):
     pattern = r'\([^)]*\)'  # 괄호로 묶인 데이터를 찾는 정규표현식 패턴
-    dataset[column_name] = dataset[column_name].apply(lambda x: re.sub(pattern, '', str(x)))
-    return dataset
+    df[column_name] = df[column_name].apply(lambda x: re.sub(pattern, '', str(x)))
+    return df
 
 # 사용일자 20220303 같은 데이터를 기준으로 해당 날짜의 요일을 구해 새로운 feature인 '요일'에 저장하는 함수.
 def get_day_of_week(df, column_name):
@@ -33,10 +33,10 @@ def get_day_of_week(df, column_name):
     except ValueError:
         return "유효하지 않은 날짜 형식입니다."
     
-# # 동일 역명 다른위치를 제외하고 역명이 같으면 승하차 승객수 더함 -> 환승역 처리
-# # 양평역(5호선), 양평역(중앙선)
-# def concat_same_name(df):
-#     return df[df['역명'] != '양평'].groupby(['사용일자', '역명']).sum().reset_index()
+# 동일 역명 다른위치를 제외하고 역명이 같으면 승하차 승객수 더함 -> 환승역 처리
+# 양평역(5호선), 양평역(중앙선) -> nearest bus station에 데이터가 없어서 일단 제외..
+def concat_same_name(df):
+    return df.groupby(['사용일자', '역명']).sum().reset_index()
 
 # --------------------------------------------------------------------
 
@@ -58,11 +58,11 @@ df_subway202302 = remove_bracketed_data(df_subway202302, '역명')
 df_subway202303 = remove_bracketed_data(df_subway202303, '역명')
 df_subway202304 = remove_bracketed_data(df_subway202304, '역명')
 
-# df_subway2022 = concat_same_name(df_subway2022)
-# df_subway202301 = concat_same_name(df_subway202301)
-# df_subway202302 = concat_same_name(df_subway202302)
-# df_subway202303 = concat_same_name(df_subway202303)
-# df_subway202304 = concat_same_name(df_subway202304)
+df_subway2022 = concat_same_name(df_subway2022)
+df_subway202301 = concat_same_name(df_subway202301)
+df_subway202302 = concat_same_name(df_subway202302)
+df_subway202303 = concat_same_name(df_subway202303)
+df_subway202304 = concat_same_name(df_subway202304)
 
 df_subway2022 = get_day_of_week(df_subway2022, '사용일자')
 df_subway202301 = get_day_of_week(df_subway202301, '사용일자')
