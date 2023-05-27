@@ -1,6 +1,11 @@
 import pandas as pd
-# 외부코드,전철역명,호선,정류장명,정류장ID,(X)좌표,(Y)좌표
+
+#df_final_nearest_bus_station 자료임!
 df_nearestBusStation = pd.read_csv("D:\git\DataScienceTermP\\nearest_busStation.csv", encoding='euc-kr')
+final_nearest_bus_station = pd.read_csv("D:\git\DataScienceTermP\\final_nearest_bus_station.csv", encoding='utf-8')
+
+#df_final_bus_station
+final_bus_station = pd.read_csv("D:\git\DataScienceTermP\\final_bus_station.csv", encoding='utf-8')
 
 df_BusStation2201 = pd.read_csv("D:\git\DataScienceTermP\\busStation\\busStation202201.csv", encoding='euc-kr')
 df_BusStation2202 = pd.read_csv("D:\git\DataScienceTermP\\busStation\\busStation202202.csv", encoding='euc-kr')
