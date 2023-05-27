@@ -1,10 +1,13 @@
 import pandas as pd
 
-#df_final_nearest_bus_station 자료임!
+# nearest_bus_station 자료
 df_nearestBusStation = pd.read_csv("D:\git\DataScienceTermP\\nearest_busStation.csv", encoding='euc-kr')
 final_nearest_bus_station = pd.read_csv("D:\git\DataScienceTermP\\final_nearest_bus_station.csv", encoding='utf-8')
 
-#df_final_bus_station
+# weather 자료
+df_weather = pd.read_csv("D:\git\DataScienceTermP\weather.csv", encoding='euc-kr')
+
+# df_final_bus_station
 final_bus_station = pd.read_csv("D:\git\DataScienceTermP\\final_bus_station.csv", encoding='utf-8')
 
 df_BusStation2201 = pd.read_csv("D:\git\DataScienceTermP\\busStation\\busStation202201.csv", encoding='euc-kr')
