@@ -1,8 +1,6 @@
 # DataScienceTermP
 3학년 1학기 데이터과학 텀프로젝트 preprocessing
 
-## 코드 수정해야 할 부분
-
 ## 진행상황
 ### 버스정류장 데이터
 1. feature 드롭 끝난상태
