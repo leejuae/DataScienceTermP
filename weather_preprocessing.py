@@ -4,6 +4,7 @@
 # df_weather = data_declaration.df_weather
 # df_weather = df_weather[['일시', '평균기온(°C)', '강수 계속시간(hr)', '일강수량(mm)', '평균 상대습도(%)', '평균 전운량(1/10)']]
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def remove_hyphens(df):
     df = df.copy()
@@ -33,3 +34,18 @@ df_weather = df_weather[['일시', '평균기온(°C)', '일강수량(mm)', '평
 df_weather = weather_preprocessing(df_weather)
 
 print(df_weather.head())
+
+
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+axs[0].hist(df_weather['일강수량(mm)'], bins=5)
+axs[0].set_title('Histogram of daily precipitation(mm)')
+axs[0].set_xlabel('precipitation(mm)')
+axs[0].set_ylabel('Frequency')
+
+axs[1].hist(df_weather['평균기온(°C)'], bins=5, color='orange')
+axs[1].set_title('Histogram of average temperature(°C)')
+axs[1].set_xlabel('temperature(°C)')
+axs[1].set_ylabel('Frequency')
+
+plt.show()
