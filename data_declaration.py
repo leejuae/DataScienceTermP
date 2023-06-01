@@ -3,6 +3,7 @@ import pandas as pd
 #concat 자료들
 df_concat_bus_near = pd.read_csv("data/concat_data/concat_near_bus.csv", encoding='utf-8')
 df_concat_bus_near_sub = pd.read_csv("data/concat_data/concat_bus_near_sub.csv", encoding='utf-8')
+df_concat_final = pd.read_csv("data/concat_data/concat_final.csv", encoding='utf-8')
 
 # nearest_bus_station 자료
 df_nearestBusStation = pd.read_csv("data\\nearest_busStation.csv", encoding='euc-kr')
