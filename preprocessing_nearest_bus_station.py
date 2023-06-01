@@ -23,4 +23,4 @@ def convert_eng_station(df):
 df_nearest_bus_station = data_declaration.df_nearestBusStation
 df_nearest_bus_station = df_nearest_bus_station[['전철역코드', '외부코드', '전철역명', '호선', '정류장명', '정류장ID']]
 convert_eng_station(df_nearest_bus_station)
-df_nearest_bus_station.to_csv("final_nearest_bus_station.csv", index = False)
+df_nearest_bus_station.to_csv("data/final_data/final_nearest_bus_station.csv", index = False)

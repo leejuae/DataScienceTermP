@@ -34,7 +34,7 @@ df_weather = df_weather[['일시', '평균기온(°C)', '일강수량(mm)', '평
 df_weather = weather_preprocessing(df_weather)
 
 # 날씨 preprocessing 결과 csv저장
-df_weather.to_csv("final_data/final_weather.csv", index = False)
+df_weather.to_csv("data/final_data/final_weather.csv", index = False)
 
 print(df_weather.head())
 
