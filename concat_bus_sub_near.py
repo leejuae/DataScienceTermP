@@ -31,4 +31,4 @@ df_bn.rename(columns = {'전철역명' : '역명'}, inplace =True)
 
 df_final = concat_sub_bus(df_bn, df_sub)
 
-df_final.to_csv("data/concat_data/concat_bus_near_sub.csv", index = False)
+df_final.to_csv("concat_data/concat_bus_near_sub.csv", index = False)

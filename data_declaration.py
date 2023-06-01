@@ -1,10 +1,5 @@
 import pandas as pd
 
-#concat 자료들
-df_concat_bus_near = pd.read_csv("data/concat_data/concat_near_bus.csv", encoding='utf-8')
-df_concat_bus_near_sub = pd.read_csv("data/concat_data/concat_bus_near_sub.csv", encoding='utf-8')
-df_concat_final = pd.read_csv("data/concat_data/concat_final.csv", encoding='utf-8')
-
 # nearest_bus_station 자료
 df_nearestBusStation = pd.read_csv("nearest_bus_station.csv", encoding='utf-8')
 final_nearest_bus_station = pd.read_csv("final_nearest_bus_station.csv", encoding='utf-8')
@@ -37,3 +32,8 @@ df_subway_202302 = pd.read_csv("subway/subway202302.csv", encoding='utf-8')
 df_subway_202303 = pd.read_csv("subway/subway202303.csv", encoding='utf-8')
 df_subway_202304 = pd.read_csv("subway/subway202304.csv", encoding='utf-8')
 df_subway_2022 = pd.read_csv("subway/subway2022.csv", encoding='utf-8')
+
+# concat 자료들
+# df_concat_bus_near = pd.read_csv("concat_data/concat_near_bus.csv", encoding='utf-8')
+# df_concat_bus_near_sub = pd.read_csv("concat_data/concat_bus_near_sub.csv", encoding='utf-8')
+df_concat_final = pd.read_csv("concat_data/concat_final.csv", encoding='utf-8')
