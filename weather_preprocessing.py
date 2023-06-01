@@ -1,5 +1,5 @@
 # weather Preprocessing
-# import data_declaration
+import data_declaration
 
 # df_weather = data_declaration.df_weather
 # df_weather = df_weather[['일시', '평균기온(°C)', '강수 계속시간(hr)', '일강수량(mm)', '평균 상대습도(%)', '평균 전운량(1/10)']]
@@ -28,10 +28,13 @@ def weather_preprocessing(df):
     df = nan2zero(df)
     return df
 
-df_weather = pd.read_csv("data/weather.csv", encoding='euc-kr')
+df_weather = data_declaration.df_weather
 
 df_weather = df_weather[['일시', '평균기온(°C)', '일강수량(mm)', '평균 상대습도(%)']]
 df_weather = weather_preprocessing(df_weather)
+
+# 날씨 preprocessing 결과 csv저장
+df_weather.to_csv("final_data/final_weather.csv", index = False)
 
 print(df_weather.head())
 

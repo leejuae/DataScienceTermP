@@ -34,6 +34,14 @@ def get_day_of_week(df, column_name):
         return "유효하지 않은 날짜 형식입니다."
     
 # 동일 역명 다른위치를 제외하고 역명이 같으면 승하차 승객수 더함 -> 환승역 처리
+# 양평역(5호선), 양평역(중앙선) ->중앙선이 뭔가 처리가 안됨..! 확인해보기
+def yang(df):
+    df.loc[(df['노선명'] == '5호선') & (df['역명'] == '양평'), '역명'] = '양평(5호선)'
+    df.loc[(df['노선명'] == '중앙선') & (df['역명'] == '양평'), '역명'] = '양평(중앙선)'
+        
+    return df
+    
+# 동일 역명 다른위치를 제외하고 역명이 같으면 승하차 승객수 더함 -> 환승역 처리
 # 양평역(5호선), 양평역(중앙선) -> nearest bus station에 데이터가 없어서 일단 제외..
 def concat_same_name(df):
     return df.groupby(['사용일자', '역명']).sum().reset_index()
@@ -57,6 +65,12 @@ df_subway202301 = remove_bracketed_data(df_subway202301, '역명')
 df_subway202302 = remove_bracketed_data(df_subway202302, '역명')
 df_subway202303 = remove_bracketed_data(df_subway202303, '역명')
 df_subway202304 = remove_bracketed_data(df_subway202304, '역명')
+
+df_subway2022 = yang(df_subway2022)
+df_subway202301 = yang(df_subway202301)
+df_subway202302 = yang(df_subway202302)
+df_subway202303 = yang(df_subway202303)
+df_subway202304 = yang(df_subway202304)
 
 df_subway2022 = concat_same_name(df_subway2022)
 df_subway202301 = concat_same_name(df_subway202301)

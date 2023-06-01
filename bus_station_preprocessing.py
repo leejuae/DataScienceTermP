@@ -97,4 +97,4 @@ df_concatenated = pd.concat([df_BusStation2201, df_BusStation2202, df_BusStation
 
 
 # 지하철 역 주변의 버스정류장만 뽑아서 만듦.
-df_concatenated.to_csv("final_bus_station.csv", index = False)
+df_concatenated.to_csv("final_data/final_bus_station.csv", index = False)
