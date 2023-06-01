@@ -21,7 +21,7 @@ def get_day_of_week(df, column_name):
         
         # Iterate over the column values and convert them to datetime objects
         dates = [datetime.strptime(date, "%Y%m%d") for date in df[column_name]]
-        
+    
         # Get the day of the week for each date
         day_of_weeks = [date.strftime("%A") for date in dates]
         
@@ -88,4 +88,4 @@ df_subway202304 = get_day_of_week(df_subway202303, '사용일자')
 df_concatenated = pd.concat([df_subway2022, df_subway202301, df_subway202302,
                              df_subway202303, df_subway202304])
 
-df_concatenated.to_csv("concatSubwayStation.csv")
+df_concatenated.to_csv("final_data/concatSubwayStation.csv")
