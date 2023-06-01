@@ -18,24 +18,8 @@ def mergedf(df_bus, df_nearest):
     return df_bus
 
 
-# 버스정류장이랑 지하철역 합침
-def concat_sub_bus(df_bus, df_sub):
-    
-    df = pd.merge(df_bus, df_sub, on=['사용일자', '역명'], how='left')
-    
-    # # 승차총승객수 열끼리 더하기
-    # df['총승차승객수'] = df['승차총승객수_x'] + df['승차총승객수_y']
-
-    # # 하차총승객수 열끼리 더하기
-    # df['총하차승객수'] = df['하차총승객수_x'] + df['하차총승객수_y']
-    
-    # #x, y 드롭
-    # df= df[['사용일자', '역명', '요일', '총승차승객수', '총하차승객수', '요일']]
-    
-    return df
-
-
 # --------------------------------------------------------------------
+
 
 df_bus = data_declaration.final_bus_station
 df_nearest = data_declaration.final_nearest_bus_station
@@ -54,12 +38,3 @@ df_final = df_final.groupby(['사용일자', '전철역명']).sum().reset_index(
 df_final.loc[df_final['전철역명'] == '총신대입구(이수)', '전철역명'] = '이수'
 
 df_final.to_csv("data/concat_data/concat_near_bus.csv", index = False)
-
-# #df_final = concat_sub_bus(df_final)
-
-# #전철역명 -> 역명으로 통일
-# df_final.rename(columns = {'전철역명' : '역명'}, inplace =True)
-
-# df_final = concat_sub_bus(df_final, df_subway)
-
-# df_final.to_csv("test.csv", index = False)
