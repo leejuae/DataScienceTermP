@@ -37,4 +37,4 @@ df_final = df_final.groupby(['사용일자', '전철역명']).sum().reset_index(
 # 총신대입구(이수) --> 이수로 명칭변경
 df_final.loc[df_final['전철역명'] == '총신대입구(이수)', '전철역명'] = '이수'
 
-df_final.to_csv("data/concat_data/concat_near_bus.csv", index = False)
+df_final.to_csv("concat_data/concat_near_bus.csv", index = False)
