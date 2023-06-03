@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 import pandas as pd
 import numpy as np
@@ -56,5 +57,13 @@ model.fit(features_train, target_train)
 predictions = model.predict(features_test)
 
 # Evaluate the model
-r2_score = model.score(predictions, target_test)
-print("R-squared Score:", r2_score)
+accuracy = metrics.accuracy_score(predictions, target_test)
+print("Accuracy:", accuracy)
+
+cm = metrics.confusion_matrix(predictions, target_test)
+print("Confusion Matrix:")
+print(cm)
+
+scores = cross_val_score(model, features, target, cv=5)
+print("Cross-Validation Scores:", scores)
+print("Mean Score:", scores.mean())
