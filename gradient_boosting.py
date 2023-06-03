@@ -6,6 +6,8 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Assume that you have a DataFrame 'df' with 'n' features and 'target' as your target variable
 df = pd.read_csv('data/concat_final.csv')
@@ -21,9 +23,9 @@ df[features_to_scale] = scaler.fit_transform(df[features_to_scale])
 
 def traffic_level(x):
     if x > 0.75:
-        return '혼잡'
+        return '매우혼잡'
     elif 0.5 < x <= 0.75:
-        return '약간혼잡'
+        return '혼잡'
     elif 0.25 < x <= 0.5:
         return '보통'
     else:
@@ -36,12 +38,11 @@ le = LabelEncoder()
 df[encoding_column] = df[encoding_column].apply(le.fit_transform)
 print(df.head())
 
-features_columns = df.columns.drop(['일시', '총승차승객수', '총하차승객수'])
+features_columns = df.columns.drop(['일시', '총승차승객수', '총하차승객수', '유동인구수'])
 target_columns = ['혼잡유무']
 
 features = df[features_columns]
 target = df[target_columns].values.ravel()
-
 
 # Split the dataset into training and testing data
 features_train, features_test, target_train, target_test = train_test_split(features, target, test_size=0.3, random_state=0)
@@ -63,6 +64,16 @@ cm = metrics.confusion_matrix(predictions, target_test)
 print("Confusion Matrix:")
 print(cm)
 
-scores = cross_val_score(model, features, target, cv=5)
+scores = cross_val_score(model, features, target, cv=10)
 print("Cross-Validation Scores:", scores)
 print("Mean Score:", scores.mean())
+
+correlation_df = pd.concat([features, pd.DataFrame(target, columns=target_columns)], axis=1)
+
+# Correlation matrix를 계산합니다
+corr = correlation_df.corr()
+plt.figure(figsize=(10,10))
+sns.heatmap(corr, annot=True, cmap='coolwarm', square=True)
+
+# Plot을 출력합니다
+plt.show()
