@@ -16,7 +16,6 @@ print(df.head())
 
 df['유동인구수'] = df['총승차승객수'] + df['총하차승객수']
 
-
 features_to_scale = ['유동인구수', '평균 상대습도(%)', '일강수량(mm)', '평균기온(°C)']
 scaler = MinMaxScaler()
 df[features_to_scale] = scaler.fit_transform(df[features_to_scale])
@@ -33,9 +32,13 @@ def traffic_level(x):
 
 df['혼잡유무'] = df['유동인구수'].apply(traffic_level)
 
+label_encoders = {}
+
 encoding_column = ['역명', '요일', '혼잡유무']
-le = LabelEncoder()
-df[encoding_column] = df[encoding_column].apply(le.fit_transform)
+for column in encoding_column:
+    le = LabelEncoder()
+    df[column] = le.fit_transform(df[column])
+    label_encoders[column] = le
 print(df.head())
 
 features_columns = df.columns.drop(['일시', '총승차승객수', '총하차승객수', '유동인구수'])
@@ -43,6 +46,18 @@ target_columns = ['혼잡유무']
 
 features = df[features_columns]
 target = df[target_columns].values.ravel()
+
+################### test code part
+# station_name = input("Enter the station name: ")
+# if station_name in label_encoders['역명'].classes_:
+#     encoded_station_name = label_encoders['역명'].transform([station_name])[0]
+#     df_filtered = df[df['역명'] == encoded_station_name]
+#     print("Data for Station:", station_name)
+#     print(df_filtered.head())
+# else:
+#     print("The station name you entered does not exist in the dataset.")
+###################
+
 
 # Split the dataset into training and testing data
 features_train, features_test, target_train, target_test = train_test_split(features, target, test_size=0.3, random_state=0)

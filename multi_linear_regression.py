@@ -14,9 +14,13 @@ print(df.head())
 
 df['유동인구수'] = df['총승차승객수'] + df['총하차승객수']
 
+label_encoders = {}
+
 encoding_column = ['역명', '요일']
-le = LabelEncoder()
-df[encoding_column] = df[encoding_column].apply(le.fit_transform)
+for column in encoding_column:
+    le = LabelEncoder()
+    df[column] = le.fit_transform(df[column])
+    label_encoders[column] = le
 print(df.head())
 
 features_to_scale = ['유동인구수', '평균 상대습도(%)', '일강수량(mm)', '평균기온(°C)']
