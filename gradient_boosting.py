@@ -6,10 +6,9 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 import pandas as pd
-import numpy as np
 
 # Assume that you have a DataFrame 'df' with 'n' features and 'target' as your target variable
-df = pd.read_csv('data/concat_final.csv') # replace 'data.csv' with your data file
+df = pd.read_csv('data/concat_final.csv')
 
 print(df.head())
 
