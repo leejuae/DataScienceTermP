@@ -1,15 +1,16 @@
 import pandas as pd
 
-# nearest_bus_station 자료
+# Load nearest_bus_station data
 df_nearestBusStation = pd.read_csv("nearest_bus_station.csv", encoding='utf-8')
 final_nearest_bus_station = pd.read_csv("final_nearest_bus_station.csv", encoding='utf-8')
 
-# weather 자료
+# Load weather data
 df_weather = pd.read_csv("weather.csv", encoding='euc-kr')
 
-# df_final_bus_station
+# Load final_bus_station data
 final_bus_station = pd.read_csv("final_bus_station.csv", encoding='utf-8')
 
+# Load bus station data for each month
 df_BusStation2201 = pd.read_csv("bus_station/busStation202201.csv", encoding='utf-8')
 df_BusStation2202 = pd.read_csv("bus_station/busStation202202.csv", encoding='utf-8')
 df_BusStation2203 = pd.read_csv("bus_station/busStation202203.csv", encoding='utf-8')
@@ -27,13 +28,14 @@ df_BusStation2302 = pd.read_csv("bus_station/busStation202302.csv", encoding='ut
 df_BusStation2303 = pd.read_csv("bus_station/busStation202303.csv", encoding='utf-8')
 df_BusStation2304 = pd.read_csv("bus_station/busStation202304.csv", encoding='utf-8')
 
+# Load subway data for each month
 df_subway_202301 = pd.read_csv("subway/subway202301.csv", encoding='utf-8')
 df_subway_202302 = pd.read_csv("subway/subway202302.csv", encoding='utf-8')
 df_subway_202303 = pd.read_csv("subway/subway202303.csv", encoding='utf-8')
 df_subway_202304 = pd.read_csv("subway/subway202304.csv", encoding='utf-8')
 df_subway_2022 = pd.read_csv("subway/subway2022.csv", encoding='utf-8')
 
-# concat 자료들
+# Load concatenated data
 # df_concat_bus_near = pd.read_csv("concat_data/concat_near_bus.csv", encoding='utf-8')
 # df_concat_bus_near_sub = pd.read_csv("concat_data/concat_bus_near_sub.csv", encoding='utf-8')
 df_concat_final = pd.read_csv("concat_data/concat_final.csv", encoding='utf-8')

@@ -1,4 +1,3 @@
-# First, we need to import necessary libraries
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
@@ -7,30 +6,35 @@ from sklearn import metrics
 import pandas as pd
 import numpy as np
 
-# Assume that you have a DataFrame 'df' with 'n' features and 'target' as your target variable
-df = pd.read_csv('data/concat_final.csv') # replace 'data.csv' with your data files
+# Read the DataFrame from 'data/concat_final.csv'
+df = pd.read_csv('data/concat_final.csv')  
 
+# Print the first few rows of the DataFrame
 print(df.head())
 
+# Calculate '유동인구수' by summing '총승차승객수' and '총하차승객수'
 df['유동인구수'] = df['총승차승객수'] + df['총하차승객수']
 
+# Encode categorical columns using LabelEncoder
 label_encoders = {}
 
-encoding_column = ['역명', '요일']
-for column in encoding_column:
+encoding_columns = ['역명', '요일']
+for column in encoding_columns:
     le = LabelEncoder()
     df[column] = le.fit_transform(df[column])
     label_encoders[column] = le
+
+# Print the updated DataFrame with encoded columns
 print(df.head())
 
+# Scale the selected features using StandardScaler
 features_to_scale = ['유동인구수', '평균 상대습도(%)', '일강수량(mm)', '평균기온(°C)']
 scaler = StandardScaler()
 df[features_to_scale] = scaler.fit_transform(df[features_to_scale])
 
-# Now, we split the dataset into features (independent variables) and target (dependent variable)
+# Split the dataset into features (independent variables) and target (dependent variable)
 features_columns = df.columns.drop(['일시', '총승차승객수', '총하차승객수'])
 target_columns = ['유동인구수']
-
 features = df[features_columns]
 target = df[target_columns]
 
@@ -43,10 +47,10 @@ regressor = LinearRegression()
 # Fit the model with training data
 regressor.fit(features_train, target_train)
 
-# Now, we make predictions on the testing data
+# Make predictions on the testing data
 target_pred = regressor.predict(features_test)
 
 # Evaluate the model
-print('Mean Squared Error:', metrics.mean_squared_error(target_test, target_pred))  
+print('Mean Squared Error:', metrics.mean_squared_error(target_test, target_pred))
 print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(target_test, target_pred)))
-print('Mean Absolute Error:', metrics.mean_absolute_error(target_test, target_pred))  
+print('Mean Absolute Error:', metrics.mean_absolute_error(target_test, target_pred))

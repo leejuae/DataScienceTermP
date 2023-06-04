@@ -1,21 +1,19 @@
-# nearest_bus_station preprocessing
 import data_declaration
 
-
-#
+# Function to convert subway line names
 def convert_eng_station(df):
     for index, row in df.iterrows():
         line_name = str(row['호선'])
         if not line_name.isdigit():
-            # B -> 분당선으로 이름변경
+            # Change 'B' to '분당선'
             if line_name == 'B':
                 line_name = '분당선'
 
-            # K -> 중앙선으로 이름변경
+            # Change 'K' to '중앙선'
             elif line_name == 'K':
                 line_name = '중앙선'
 
-        # 숫자로 저장되어있는 호선을 '0호선'으로 이름변경
+        # Change numeric subway line names to format 'X Line'
         else:
             line_name = line_name + '호선'
         df.at[index, '호선'] = line_name

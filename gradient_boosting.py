@@ -1,4 +1,3 @@
-# First, we need to import necessary libraries
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
@@ -9,17 +8,21 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Assume that you have a DataFrame 'df' with 'n' features and 'target' as your target variable
+# Read the DataFrame from 'data/concat_final.csv'
 df = pd.read_csv('data/concat_final.csv')
 
+# Print the first few rows of the DataFrame
 print(df.head())
 
+# Calculate '유동인구수' by summing '총승차승객수' and '총하차승객수'
 df['유동인구수'] = df['총승차승객수'] + df['총하차승객수']
 
+# Scale the selected features using MinMaxScaler
 features_to_scale = ['유동인구수', '평균 상대습도(%)', '일강수량(mm)', '평균기온(°C)']
 scaler = MinMaxScaler()
 df[features_to_scale] = scaler.fit_transform(df[features_to_scale])
 
+# Define a function to categorize traffic level based on '유동인구수'
 def traffic_level(x):
     if x > 0.75:
         return '매우혼잡'
@@ -30,39 +33,32 @@ def traffic_level(x):
     else:
         return '원활'
 
+# Apply the 'traffic_level' function to create the '혼잡유무' column
 df['혼잡유무'] = df['유동인구수'].apply(traffic_level)
 
+# Initialize an empty dictionary to store label encoders
 label_encoders = {}
 
-encoding_column = ['역명', '요일', '혼잡유무']
-for column in encoding_column:
+# Encode categorical columns using LabelEncoder
+encoding_columns = ['역명', '요일', '혼잡유무']
+for column in encoding_columns:
     le = LabelEncoder()
     df[column] = le.fit_transform(df[column])
     label_encoders[column] = le
+
+# Print the updated DataFrame with encoded columns
 print(df.head())
 
+# Select the features and target columns
 features_columns = df.columns.drop(['일시', '총승차승객수', '총하차승객수', '유동인구수'])
 target_columns = ['혼잡유무']
-
 features = df[features_columns]
 target = df[target_columns].values.ravel()
-
-################### test code part
-# station_name = input("Enter the station name: ")
-# if station_name in label_encoders['역명'].classes_:
-#     encoded_station_name = label_encoders['역명'].transform([station_name])[0]
-#     df_filtered = df[df['역명'] == encoded_station_name]
-#     print("Data for Station:", station_name)
-#     print(df_filtered.head())
-# else:
-#     print("The station name you entered does not exist in the dataset.")
-###################
-
 
 # Split the dataset into training and testing data
 features_train, features_test, target_train, target_test = train_test_split(features, target, test_size=0.3, random_state=0)
 
-# Initialize the Gradient Boosting regressor
+# Initialize the Gradient Boosting classifier
 model = GradientBoostingClassifier()
 
 # Fit the model on the training data
@@ -75,20 +71,25 @@ predictions = model.predict(features_test)
 accuracy = metrics.accuracy_score(predictions, target_test)
 print("Accuracy:", accuracy)
 
+# Compute and display the confusion matrix
 cm = metrics.confusion_matrix(predictions, target_test)
 print("Confusion Matrix:")
 print(cm)
 
+# Perform cross-validation and print the scores
 scores = cross_val_score(model, features, target, cv=10)
 print("Cross-Validation Scores:", scores)
 print("Mean Score:", scores.mean())
 
+# Create a correlation matrix DataFrame
 correlation_df = pd.concat([features, pd.DataFrame(target, columns=target_columns)], axis=1)
 
-# Correlation matrix를 계산합니다
+# Calculate the correlation matrix
 corr = correlation_df.corr()
+
+# Plot the correlation matrix using a heatmap
 plt.figure(figsize=(10,10))
 sns.heatmap(corr, annot=True, cmap='coolwarm', square=True)
 
-# Plot을 출력합니다
+# Display the plot
 plt.show()

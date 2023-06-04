@@ -1,14 +1,17 @@
 *.xlsx
 
-# 디폴트 무시된 파일
+# Default ignored files
 /shelf/
 /workspace.xml
-# 에디터 기반 HTTP 클라이언트 요청
+
+# Editor-based HTTP client requests
 /httpRequests/
-# Datasource local storage ignored files
+
+# Ignored files for Datasource local storage
 data_declaration.py
 /dataSources.local.xml
-# Zeppelin 무시된 파일
+
+# Ignored files for Zeppelin
 /ZeppelinRemoteNotebooks/
 
 /datasetTest.py/
