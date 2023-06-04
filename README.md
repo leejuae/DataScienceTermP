@@ -1,42 +1,34 @@
 # DataScienceTermP
-3학년 1학기 데이터과학 텀프로젝트 preprocessing
+## 가천대학교 2023년 1학기 데이터과학
 
-## 진행상황
-### 버스정류장 데이터
-1. feature 드롭 끝난상태
-> 2023데이터와 2022 데이터의 feature가 달라 고려해서 drop
-2. 버스별로 정리되어 있기에 **사용일자**, **버스정류장ARS** 기준으로 합쳐서 승하차 승객수 다 더함
-3. 실제 사용하지 않는 버스정류장 데이터도 존재함. **~**이라는 drity data 형태로 저장되었기에 해당 row drop 진행함
-4. nearest_bus_station데이터와 합치기 완료
+```
+Team Member
+- Seon (I.E.)
+- Lee H (SW)
+- Lee J (Sw)
+- Lee Y (SW)
+```
 
-### nearest_bus_station 데이터
-1. **호선** feature에서 수인분당선과 경의중앙선 데이터가 **B**, **K**로 저장되어 있기에 값을 변경함.
-> 해당내용 버스정류장 데이터와 같이 처리하기엔 코드가 조금 복잡해보이는 감이 있어 **nearest_bus_station_preprocessing.py**로 따로 파일 만들어서 진행
-2. 버스정류장 데이터와 합치기 완료
-3. 총신대입구(이수) 이렇게 저장되어있음. 이수로 수정함.
+-----
+### Data Reference
 
-### 지하철역 데이터
-1. feature 드롭 끝난상태
-2. **부역명** 데이터 제외
-3. **요일 feature** 추가완료
-4. **양평역** data **양평역(5호선)**, **양평역(중앙선)**으로 바꿈
-5. 환승역 데이터 합침
-6. 서울역만 이름에 '역'이 들어감. 해당 명칭 서울로 변경
+https://www.data.go.kr/data/15044225/fileData.do
 
-### 날씨 데이터
-1. 날씨 데이터에서 **0000-00-00** 으로 저장되어있는 형태에서 **-** 제거 완료
-2. **'일시', '평균기온(°C)', '일강수량(mm)', '평균 상대습도(%)'** 만 남김
-3. null data 0으로 변경
-4. 2022 이전 row drop
+https://data.seoul.go.kr/dataList/OA-12913/S/1/datasetView.do
 
-## 할일
-1. 결과: 0요일에 0기온과 0강수량 0습도이면 혼잡도가 ?? 정도일 것이다.
-2. 역명은 label encoder로 수행할 예정.
-3. 요일은 라벨 인코더 수행 안하고 직접 부과하는 방식으로 할 예정
-> 방식은 같지만 좀 더 직관성을 확보하기 위해! 최종 자료에서도 굳이 원래값으로 변환하지 않아도 바로 이해가 가능하게 하고싶어서
->ex) sun = 0, mon = 1, tue = 2, wed = 3, ...
-4. 숫자데이터는 전부 min-max scaling 진행할 예정. 
-5. 그런데 강수량 0은 가중치 잔뜩 부과해서 중요한 데이터로 만들어버리기
+https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36
 
-### 그 외
-3. normalization, tokenization 등 수행해야함.
+https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do
+
+-----
+You can run a function on the model by downloading only the dataset posted on git.
+
+-----
+We use Two Model.
+- Regression : multi_linear_regression.py
+
+<img src='image/Reg.png'>
+
+- GradientBoostingClassifier : gradient_boosting.py
+
+<img src='image/GBC.png'>
