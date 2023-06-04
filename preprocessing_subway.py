@@ -14,7 +14,7 @@ def remove_bracketed_data(df, column_name):
     
     return df
 
-# 사용일자 20220303 같은 데이터를 기준으로 해당 날짜의 요일을 구해 새로운 feature인 '요일'에 저장하는 함수.
+# 사용일자(20220303)같은 데이터를 기준으로 해당 날짜의 요일을 구해 새로운 feature인 '요일'에 저장하는 함수.
 def get_day_of_week(df):
         # Convert integer values to strings
         df['사용일자'] = df['사용일자'].astype(str)
@@ -30,7 +30,7 @@ def get_day_of_week(df):
         
         return df
     
-# 양평역(5호선), 양평역(중앙선) ->중앙선이 뭔가 처리가 안됨..! 확인해보기
+# 양평역(5호선), 양평역(중앙선)
 # 서울역 데이터 서울로 바꿔야 함.
 def yang(df):
     # 서울역 데이터만 역이 붙어 있어서 '서울'로 역명 변경
