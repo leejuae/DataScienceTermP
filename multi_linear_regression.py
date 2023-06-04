@@ -5,6 +5,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Read the DataFrame from 'data/concat_final.csv'
 df = pd.read_csv('data/concat_final.csv')  
@@ -54,3 +55,16 @@ target_pred = regressor.predict(features_test)
 print('Mean Squared Error:', metrics.mean_squared_error(target_test, target_pred))
 print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(target_test, target_pred)))
 print('Mean Absolute Error:', metrics.mean_absolute_error(target_test, target_pred))
+
+
+# Draw the model
+plt.figure(figsize=(10,6))
+
+plt.scatter(target_test, target_pred)
+plt.xlabel("Actual Values")
+plt.ylabel("Predicted Values")
+plt.title("Actual vs. Predicted Values")
+
+plt.plot([min(target_test.values), max(target_test.values)], [min(target_test.values), max(target_test.values)], color='red') # A red line representing perfect prediction
+plt.tight_layout()
+plt.show()
