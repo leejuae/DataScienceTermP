@@ -76,6 +76,9 @@ print("Best Parameters:", random_search.best_params_)
 # Get the best model from RandomizedSearchCV
 best_model = random_search.best_estimator_
 
+# Fit the best model on the training data
+best_model.fit(features_train, target_train)
+
 # Predict on the test data using the best model
 predictions = best_model.predict(features_test)
 
@@ -89,15 +92,13 @@ print("Confusion Matrix:")
 print(cm)
 
 # Perform cross-validation and print the scores
-scores = cross_val_score(model, features, target, cv=5)
+scores = cross_val_score(best_model, features, target, cv=5)
 print("Cross-Validation Scores:", scores)
 print("Mean Score:", scores.mean())
 
 print()
 
-# Assuming 'model' is a trained RandomForestClassifier or GradientBoostingClassifier
-importance = model.feature_importances_
+# Assuming 'best_model' is a trained RandomForestClassifier or GradientBoostingClassifier
+importance = best_model.feature_importances_
 for i,j in enumerate(importance):
     print(features.columns[i], ":", j)
-
-
